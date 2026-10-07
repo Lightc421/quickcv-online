@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QuickCV Online</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #f4f7fb;
+      color: #222;
+    }
+
+    header {
+      background: #0b5cff;
+      color: white;
+      padding: 22px 15px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 30px;
+      margin-bottom: 6px;
+    }
+
+    header p {
+      font-size: 15px;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 25px auto;
+      padding: 15px;
+    }
+
+    .card {
+      background: white;
+      padding: 25px;
+      border-radius: 14px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      margin-bottom: 18px;
+      color: #0b5cff;
+    }
+
+    label {
+      display: block;
+      margin-top: 14px;
+      margin-bottom: 6px;
+      font-weight: bold;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 15px;
+    }
+
+    textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    button {
+      width: 100%;
+      margin-top: 20px;
+      padding: 14px;
+      border: none;
+      border-radius: 8px;
+      background: #0b5cff;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #0847c7;
+    }
+
+    #cvPreview {
+      display: none;
+    }
+
+    .cv {
+      background: white;
+      padding: 35px;
+      border-radius: 5px;
+      line-height: 1.6;
+    }
+
+    .cv h1 {
+      color: #0b5cff;
+      font-size: 30px;
+    }
+
+    .cv h3 {
+      color: #0b5cff;
+      border-bottom: 1px solid #ddd;
+      margin-top: 20px;
+      margin-bottom: 8px;
+      padding-bottom: 5px;
+    }
+
+    .download {
+      background: #16a34a;
+    }
+
+    @media print {
+      body * {
+        visibility: hidden;
+      }
+
+      #cvPreview,
+      #cvPreview * {
+        visibility: visible;
+      }
+
+      #cvPreview {
+        display: block !important;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+      }
+
+      .download {
+        display: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>QuickCV Online</h1>
+  <p>Create your professional CV quickly and easily</p>
+</header>
+
+<div class="container">
+
+  <div class="card" id="formCard">
+    <h2>Create Your CV</h2>
+
+    <label>Full Name</label>
+    <input id="name" placeholder="Enter your full name">
+
+    <label>Email</label>
+    <input id="email" type="email" placeholder="Enter your email">
+
+    <label>Phone Number</label>
+    <input id="phone" placeholder="Enter your phone number">
+
+    <label>Address</label>
+    <input id="address" placeholder="Enter your address">
+
+    <label>Professional Summary</label>
+    <textarea id="summary" placeholder="Write a short summary about yourself"></textarea>
+
+    <label>Education</label>
+    <textarea id="education" placeholder="Example: B.Sc. Public Health - University Name - 2026"></textarea>
+
+    <label>Work Experience</label>
+    <textarea id="experience" placeholder="Write your work experience"></textarea>
+
+    <label>Skills</label>
+    <textarea id="skills" placeholder="Example: Communication, Microsoft Office, Teamwork"></textarea>
+
+    <button onclick="generateCV()">Generate My CV</button>
+  </div>
+
+  <div class="card" id="cvPreview">
+    <div class="cv">
+      <h1 id="cvName"></h1>
+
+      <p id="cvContact"></p>
+
+      <h3>Professional Summary</h3>
+      <p id="cvSummary"></p>
+
+      <h3>Education</h3>
+      <p id="cvEducation"></p>
+
+      <h3>Work Experience</h3>
+      <p id="cvExperience"></p>
+
+      <h3>Skills</h3>
+      <p id="cvSkills"></p>
+    </div>
+
+    <button class="download" onclick="window.print()">
+      Download / Print CV
+    </button>
+  </div>
+
+</div>
+
+<script>
+function generateCV() {
+
+  const name = document.getElementById("name").value;
+  const email = document.getElementById("email").value;
+  const phone = document.getElementById("phone").value;
+  const address = document.getElementById("address").value;
+  const summary = document.getElementById("summary").value;
+  const education = document.getElementById("education").value;
+  const experience = document.getElementById("experience").value;
+  const skills = document.getElementById("skills").value;
+
+  if (!name) {
+    alert("Please enter your full name.");
+    return;
+  }
+
+  document.getElementById("cvName").textContent = name;
+
+  document.getElementById("cvContact").textContent =
+    email + " | " + phone + " | " + address;
+
+  document.getElementById("cvSummary").textContent = summary;
+  document.getElementById("cvEducation").textContent = education;
+  document.getElementById("cvExperience").textContent = experience;
+  document.getElementById("cvSkills").textContent = skills;
+
+  document.getElementById("cvPreview").style.display = "block";
+
+  document.getElementById("cvPreview").scrollIntoView({
+    behavior: "smooth"
+  });
+}
+</script>
+
+</body>
+</html>
